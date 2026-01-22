@@ -32,7 +32,11 @@ function createFloatingButton() {
 
   button.addEventListener('click', () => {
     const deepwikiUrl = `https://deepwiki.com/${repoInfo.user}/${repoInfo.repo}`;
-    chrome.runtime.sendMessage({ action: 'openInTab', url: deepwikiUrl });
+    if (typeof chrome !== 'undefined' && chrome.runtime) {
+      chrome.runtime.sendMessage({ action: 'openInTab', url: deepwikiUrl });
+    } else {
+      window.open(deepwikiUrl, '_blank');
+    }
   });
 
   document.body.appendChild(button);
