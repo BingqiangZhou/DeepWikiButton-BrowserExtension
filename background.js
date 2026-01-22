@@ -14,11 +14,13 @@ function openInTab(url) {
 
 // Create context menu on install
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.contextMenus.create({
-    id: 'open-deepwiki',
-    title: 'Open in DeepWiki',
-    contexts: ['page'],
-    documentUrlPatterns: ['https://github.com/*']
+  chrome.contextMenus.removeAll(() => {
+    chrome.contextMenus.create({
+      id: 'open-deepwiki',
+      title: 'Open in DeepWiki',
+      contexts: ['page'],
+      documentUrlPatterns: ['https://github.com/*']
+    });
   });
 });
 
